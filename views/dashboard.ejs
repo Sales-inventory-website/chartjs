@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="https://chartjs-plugin-datalabels.netlify.com/chartjs-plugin-datalabels.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <style>
+        .container-fluid {
+            margin: 20px 0px 20px;
+        }
+
+        .orangefont {
+            color: #ffc107;
+        }
+
+        .btn {
+            margin: 5px;
+        }
+
+        .card {
+            margin-bottom: 10px;
+        }
+
+        .top-row .card {
+            margin-bottom: 10px;
+            /* margin-top: 10px; */
+            height: 100%;
+        }
+
+        .top-row {
+            margin-bottom: 10px;
+            margin-top: 15px;
+        }
+
+        .orangediv1,
+        .orangediv {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .buttonasign {
+            justify-content: center;
+            display: flex;
+        }
+
+        .no-left-padding {
+            padding-left: 0px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="hidden" id="salesArray" value="<%= JSON.stringify(salesArray) %>" />
+        <input type="hidden" id="x_axisArray" value="<%= JSON.stringify(x_axisArray) %>" />
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Navbar</a>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link1</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link2</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        <div class="row top-row">
+            <div class="col-sm-4">
+                <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h3>Revenue Growth</h3>
+                        <span style="color: #3fd23f;">
+                            <i class="fas fa-arrow-alt-circle-up fa-3x"></i>
+                        </span>
+                        <h1 class="orangefont">$200K</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 no-left-padding">
+                <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h3>Profit</h3>
+                        <span style="color: red;">
+                            <i class="fas fa-arrow-alt-circle-down fa-3x"></i>
+                        </span>
+                        <h1 class="orangefont">-$70</h1 class="orangefont">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 no-left-padding">
+                <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h3>Total Revenue</h3>
+                        <br>
+                        <h1 class="orangefont">$500K</h1 class="orangefont">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="card bg-light">
+                    <canvas id="vertical-bar-chart1" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var salesArray = $('#salesArray').val();
+    salesArray = JSON.parse(salesArray);
+
+    var x_axisArray = $('#x_axisArray').val();
+    x_axisArray = JSON.parse(x_axisArray);
+
+
+
+    //Quantity chart
+    new Chart(document.getElementById("vertical-bar-chart1"), {
+        type: 'bar',
+        data: {
+            labels: x_axisArray,
+            datasets: [
+                {
+                    backgroundColor: ["#49d8ef", "#a27aea", "#3cba9f", "#e8c3b9", "#ef5b9f", "#ecbc2a", "#fd7e14"],
+                    data: salesArray
+                }
+            ]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Sales for last seven Months'
+            }
+        }
+    });
+
+    
+</script>
+
+</html>
